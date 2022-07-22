@@ -91,11 +91,11 @@
        */
       function getInfo() {
         return array (
-          'author' =>	'',
-          'email' =>	'',
-          'date' =>	'2008-11-22',
-          'name' =>	'spreadout Plugin',
-          'desc' =>	'',
+          'author' =>	'Michael Bowers',
+          'email' =>	'mpb@pobox.com',
+          'date' =>	'2022-07-22',
+          'name' =>	'Spreadout Plugin',
+          'desc' =>	'A simple plugin that allows for two spaces between content sentences if the user types two spaces rather than one.',
           'url' =>	'http://www.dokuwiki.org/plugin:spreadout');
       } // getInfo()
 
