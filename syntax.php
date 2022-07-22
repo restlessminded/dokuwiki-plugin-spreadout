@@ -66,7 +66,7 @@
        * @see render()
        */
       function connectTo($aMode) {
-        $this->Lexer->addSpecialPattern('(?<=[.\?\!]) {2,}', $aMode, 'plugin_spreadout');
+        $this->Lexer->addSpecialPattern('(?<=[.\?\!\:]) {2,}', $aMode, 'plugin_spreadout');
         $this->Lexer->addSpecialPattern('(?<=[.\?\!][\)\]\}]) {2,}', $aMode, 'plugin_spreadout');
       } // connectTo()
 
