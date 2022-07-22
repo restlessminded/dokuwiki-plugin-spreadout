@@ -1,7 +1,7 @@
-base   spreadout
+base   Spreadout
 author Michael Bowers
 email  restlessmind@gmail.com
 date   2022-07-22
-name   spreadout plugin
+name   Spreadout plugin
 desc   A simple plugin that allows for two spaces between content sentences if the user types two spaces rather than one.
 url    http://www.dokuwiki.org/plugin:spreadout
