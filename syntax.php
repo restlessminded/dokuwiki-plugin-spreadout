@@ -1,7 +1,7 @@
 <?php
-  if (! class_exists('syntax_plugin_spreadout')) {
-    if (! defined('DOKU_PLUGIN')) {
-      if (! defined('DOKU_INC')) {
+  if (!class_exists('syntax_plugin_spreadout')) {
+    if (!defined('DOKU_PLUGIN')) {
+      if (!defined('DOKU_INC')) {
         define('DOKU_INC', realpath(dirname(__FILE__) . '/../../') . '/');
       } // if
       define('DOKU_PLUGIN', DOKU_INC . 'lib/plugins/');
@@ -66,8 +66,14 @@
        * @see render()
        */
       function connectTo($aMode) {
+        global $lang;
+
+//<E2><80><9C>
         $this->Lexer->addSpecialPattern('(?<=[.\?\!\:]) {2,}', $aMode, 'plugin_spreadout');
-        $this->Lexer->addSpecialPattern('(?<=[.\?\!][\)\]\}\"\']) {2,}', $aMode, 'plugin_spreadout');
+        $this->Lexer->addSpecialPattern('(?<=[.\?\!\:][\)\]\}\"\']) {2,}', $aMode, 'plugin_spreadout');
+        $this->Lexer->addSpecialPattern('(?<=[.\?\!\:][\]\}\"\']) {2,}', $aMode, 'plugin_spreadout');
+
+        // $this->Lexer->addPattern('', $aMode, 'plugin_spreadout_processing');
       } // connectTo()
 
       /**
@@ -118,7 +124,7 @@
        * @static
        */
       function getType() {
-        return 'substition';
+        return 'disabled';
       } // getType()
 
       /**
@@ -138,9 +144,41 @@
        * @see render()
        * @static
        */
-      function handle($aMatch, $aState, $aPos,  Doku_Handler  $aHandler) {
+      function handle($aMatch, $aState, $aPos, Doku_Handler $aHandler) {
         return $aState;		// nothing more to do here ...
       } // handle()
+
+      /**
+       * Reprocess the text to handle typography settings.
+       *
+       * <p>
+       * Any text sent here is checked with effectively the same code
+       * that is used in <tt>/inc/Parser/Parsermode/Quotes.php</tt>.
+       * The reason for this is because when you are using typography
+       * settings to render curly quotes then they are tokenized and
+       * handled outside the level a syntax plugin can handle.  To make
+       * it so that quoted sentence breaks can be handled we have to
+       * turn off typography.
+       * </p><p>
+       * This is undesirable because I suspect most users turn on at
+       * least curly double quotes the settings, so what I do is still
+       * turn it off, but upon loading this plugin I grab a copy of the
+       * value first and duplicate its work by processing the text to
+       * transform the characters in the rendered output from the
+       * default values.  It's a <em>hideous</em> hack, but it seems to
+       * work (at least for English), and people who know my actual
+       * work should know I have to dole out some hideous hacks to do
+       * what I am usually asked to do, so...
+       * </p>
+       *
+       * @param $text String The aggregated rendered text from the renderer object.
+       * @public
+       * @see handle()
+       */
+      function reprocessDoc($text) {
+        global $lang;
+
+      }
 
       /**
        * Handle the actual output creation.
@@ -167,10 +205,11 @@
        */
       function render($aFormat, Doku_Renderer $aRenderer, $aData) {
         if (DOKU_LEXER_SPECIAL == $aData) {
-          $aRenderer->doc .= ' &nbsp;';
+          $aRenderer->doc .= '&nbsp; ';
         } // if
         return TRUE;
       } // render()
     } // class syntax_plugin_nbsp
   } // if
+
 ?>
