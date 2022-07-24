@@ -22,7 +22,7 @@
      *
      * <p>
      * Any text sent here is checked with effectively the same code
-     * that is used in <tt>/inc/Parser/Parsermode/Quotes.php</tt>.
+     * that is used in <tt>/inc/Parsing/Parsermode/Quotes.php</tt>.
      * The reason for this is because when you are using typography
      * settings to render curly quotes then they are tokenized and
      * handled outside the level a syntax plugin can handle.  To make
