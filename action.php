@@ -51,13 +51,13 @@
       $ws   =  '\s/\#~:+=&%@\-\x28\x29\]\[{}><"\'';   // whitespace
       $punc =  ';,\.?!';
 
-      if ($conf['typography_orig'] == 2) {
+      if ($conf['spreadout_typography'] == 2) {
         $event->data[1] = preg_replace("`(?<=^|[$ws])&#039;(?=[^$ws$punc])`", $lang['singlequoteopening'], $event->data[1]);
         $event->data[1] = preg_replace("`(?<=^|[^$ws]|[$punc])&#039;(?=$|[$ws$punc])`", $lang['singlequoteclosing'], $event->data[1]);
         $event->data[1] = preg_replace("`(?<=^|[^$ws$punc])&#039;(?=$|[^$ws$punc])`", $lang['apostrophe'], $event->data[1]);
       }
 
-      if ($conf['typography_orig'] > 0) {
+      if ($conf['spreadout_typography'] > 0) {
         $event->data[1] = preg_replace("`(?<=^|[$ws])&quot;(?=[^$ws$punc])`", $lang['doublequoteopening'], $event->data[1]);
         $event->data[1] = preg_replace("`&quot;`", $lang['doublequoteclosing'], $event->data[1]);
       }
@@ -65,8 +65,8 @@
   }
 
   global $conf;
-  if (!isset($conf['typography_orig']))
-    $conf['typography_orig'] = $conf['typography'];
+  if (!isset($conf['spreadout_typography']))
+    $conf['spreadout_typography'] = $conf['typography'];
   $conf['typography'] = 0;
 
 ?>
