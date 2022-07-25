@@ -14,7 +14,7 @@
 
   class action_plugin_spreadout extends DokuWiki_Action_Plugin {
     function register(Doku_Event_Handler $controller) {
-      $controller->register_hook('RENDERER_CONTENT_POSTPROCESS', 'AFTER', $this, '_spreadout_postprocess', array());
+      $controller->register_hook('TPL_ACT_RENDER', 'BEFORE', $this, '_spreadout_postprocess', array());
     }
 
     /**
