@@ -14,7 +14,7 @@
 
   class action_plugin_spreadout extends DokuWiki_Action_Plugin {
     function register(Doku_Event_Handler $controller) {
-      $controller->register_hook('TPL_ACT_RENDER', 'BEFORE', $this, '_spreadout_postprocess', array());
+      $controller->register_hook('TPL_CONTENT_DISPLAY', 'BEFORE', $this, '_spreadout_postprocess', array());
     }
 
     /**
@@ -52,14 +52,14 @@
       $punc =  ';,\.?!';
 
       if ($conf['spreadout_typography'] == 2) {
-        $event->data[1] = preg_replace("`(?<=^|[$ws])&#039;(?=[^$ws$punc])`", $lang['singlequoteopening'], $event->data[1]);
-        $event->data[1] = preg_replace("`(?<=^|[^$ws]|[$punc])&#039;(?=$|[$ws$punc])`", $lang['singlequoteclosing'], $event->data[1]);
-        $event->data[1] = preg_replace("`(?<=^|[^$ws$punc])&#039;(?=$|[^$ws$punc])`", $lang['apostrophe'], $event->data[1]);
+        $event->data = preg_replace("`(?<=^|[$ws])&#039;(?=[^$ws$punc])`", $lang['singlequoteopening'], $event->data);
+        $event->data = preg_replace("`(?<=^|[^$ws]|[$punc])&#039;(?=$|[$ws$punc])`", $lang['singlequoteclosing'], $event->data);
+        $event->data = preg_replace("`(?<=^|[^$ws$punc])&#039;(?=$|[^$ws$punc])`", $lang['apostrophe'], $event->data);
       }
 
       if ($conf['spreadout_typography'] > 0) {
-        $event->data[1] = preg_replace("`(?<=^|[$ws])&quot;(?=[^$ws$punc])`", $lang['doublequoteopening'], $event->data[1]);
-        $event->data[1] = preg_replace("`&quot;`", $lang['doublequoteclosing'], $event->data[1]);
+        $event->data = preg_replace("`(?<=^|[$ws])&quot;(?=[^$ws$punc])`", $lang['doublequoteopening'], $event->data);
+        $event->data = preg_replace("`&quot;`", $lang['doublequoteclosing'], $event->data);
       }
     }
   }
