@@ -13,8 +13,9 @@
    */
 
   class action_plugin_spreadout extends DokuWiki_Action_Plugin {
+
     function register(Doku_Event_Handler $controller) {
-      $controller->register_hook('RENDERER_CONTENT_POSTPROCESS', 'AFTER', $this, '_spreadout_postprocess', array(), PHP_INT_MAX - 127);
+      $controller->register_hook('TPL_CONTENT_DISPLAY', 'BEFORE', $this, '_spreadout_postprocess', array(), PHP_INT_MAX - 127);
     }
 
     /**
@@ -48,18 +49,22 @@
     function _spreadout_postprocess(Doku_Event $event, $param) {
       global $lang, $conf;
 
+      // This plugin inerferes with the EditTable plugin; this will make it not take effect during table editing
+      if (preg_match('/"edittable__editor"/', $event->data))
+        return;
+
       $ws   =  '\s/\#~:+=&%@\-\x28\x29\]\[{}><"\'';   // whitespace
       $punc =  ';,\.?!';
 
       if ($conf['spreadout_typography'] == 2) {
-        $event->data[1] = preg_replace("`(?<=^|[$ws])&#039;(?=[^$ws$punc])`", $lang['singlequoteopening'], $event->data[1]);
-        $event->data[1] = preg_replace("`(?<=^|[^$ws]|[$punc])&#039;(?=$|[$ws$punc])`", $lang['singlequoteclosing'], $event->data[1]);
-        $event->data[1] = preg_replace("`(?<=^|[^$ws$punc])&#039;(?=$|[^$ws$punc])`", $lang['apostrophe'], $event->data[1]);
+        $event->data = preg_replace("`(?<=^|[$ws])&#039;(?=[^$ws$punc])`", $lang['singlequoteopening'], $event->data);
+        $event->data = preg_replace("`(?<=^|[^$ws]|[$punc])&#039;(?=$|[$ws$punc])`", $lang['singlequoteclosing'], $event->data);
+        $event->data = preg_replace("`(?<=^|[^$ws$punc])&#039;(?=$|[^$ws$punc])`", $lang['apostrophe'], $event->data);
       }
 
       if ($conf['spreadout_typography'] > 0) {
-        $event->data[1] = preg_replace("`(?<=^|[$ws])&quot;(?=[^$ws$punc])`", $lang['doublequoteopening'], $event->data[1]);
-        $event->data[1] = preg_replace("`&quot;`", $lang['doublequoteclosing'], $event->data[1]);
+        $event->data = preg_replace("`(?<=^|[$ws])&quot;(?=[^$ws$punc])`", $lang['doublequoteopening'], $event->data);
+        $event->data = preg_replace("`&quot;`", $lang['doublequoteclosing'], $event->data);
       }
     }
   }
