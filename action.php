@@ -52,14 +52,14 @@
       $punc =  ';,\.?!';
 
       if ($conf['spreadout_typography'] == 2) {
-        $event->data = preg_replace("`(?<=^|[$ws])&#039;(?=[^$ws$punc])`", $lang['singlequoteopening'], $event->data);
-        $event->data = preg_replace("`(?<=^|[^$ws]|[$punc])&#039;(?=$|[$ws$punc])`", $lang['singlequoteclosing'], $event->data);
-        $event->data = preg_replace("`(?<=^|[^$ws$punc])&#039;(?=$|[^$ws$punc])`", $lang['apostrophe'], $event->data);
+        $event->data[1] = preg_replace("`(?<=^|[$ws])&#039;(?=[^$ws$punc])`", $lang['singlequoteopening'], $event->data[1]);
+        $event->data[1] = preg_replace("`(?<=^|[^$ws]|[$punc])&#039;(?=$|[$ws$punc])`", $lang['singlequoteclosing'], $event->data[1]);
+        $event->data[1] = preg_replace("`(?<=^|[^$ws$punc])&#039;(?=$|[^$ws$punc])`", $lang['apostrophe'], $event->data[1]);
       }
 
       if ($conf['spreadout_typography'] > 0) {
-        $event->data = preg_replace("`(?<=^|[$ws])&quot;(?=[^$ws$punc])`", $lang['doublequoteopening'], $event->data);
-        $event->data = preg_replace("`&quot;`", $lang['doublequoteclosing'], $event->data);
+        $event->data[1] = preg_replace("`(?<=^|[$ws])&quot;(?=[^$ws$punc])`", $lang['doublequoteopening'], $event->data[1]);
+        $event->data[1] = preg_replace("`&quot;`", $lang['doublequoteclosing'], $event->data[1]);
       }
     }
   }
