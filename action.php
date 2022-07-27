@@ -50,7 +50,7 @@
       global $lang, $conf;
 
       // This plugin inerferes with the EditTable plugin; this will make it not take effect during table editing
-      if (preg_match('/"edittable__editor"/', $event->data))
+      if (preg_match('/"(edittable__editor|wiki__text)"/', $event->data))
         return;
 
       $ws   =  '\s/\#~:+=&%@\-\x28\x29\]\[{}><"\'';   // whitespace
