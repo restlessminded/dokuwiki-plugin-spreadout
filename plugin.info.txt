@@ -1,5 +1,5 @@
 base   spreadout
-author Michael Bowers
+author Emma Bowers
 email  restlessmind@gmail.com
 date   2022-08-02
 name   Spreadout plugin
