@@ -36,7 +36,7 @@
      * See the GNU General Public License for more details.
      * </div>
      *
-     * @author <a href="mailto:mpb@pobox.com">Michael Bowers</a>
+     * @author <a href="mailto:emb@pobox.com">Emma Bowers</a>
      * @version v1.0
      */
     class syntax_plugin_spreadout extends DokuWiki_Syntax_Plugin {
@@ -94,8 +94,8 @@
        */
       function getInfo() {
         return array (
-          'author' =>	'Michael Bowers',
-          'email' =>	'mpb@pobox.com',
+          'author' =>	'Emma Bowers',
+          'email' =>	'emb@pobox.com',
           'date' =>	'2022-08-02',
           'name' =>	'Spreadout Plugin',
           'desc' =>	'A simple plugin that allows for two spaces between content sentences if the user types two spaces rather than one.',
