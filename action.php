@@ -62,16 +62,20 @@
         $event->data = preg_replace("`(?<=^|[^$ws$punc])&#039;(?=$|[^$ws$punc])`", $lang['apostrophe'], $event->data);
       }
 
+/*
       if ($conf['spreadout_typography'] > 0) {
         $event->data = preg_replace("`(?<=^|[$ws])&quot;(?=[^$ws$punc])`", $lang['doublequoteopening'], $event->data);
         $event->data = preg_replace("`&quot;`", $lang['doublequoteclosing'], $event->data);
       }
+
+      // 2025-07-04:  Use the default functionality for double-quotes.
+*/
     }
   }
 
   global $conf;
   if (!isset($conf['spreadout_typography']))
     $conf['spreadout_typography'] = $conf['typography'];
-  $conf['typography'] = 0;
+//  $conf['typography'] = 0;
 
 ?>
