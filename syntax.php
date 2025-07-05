@@ -68,9 +68,10 @@
       function connectTo($aMode) {
         global $lang;
 
-        $this->Lexer->addSpecialPattern('(?<=[.\?\!\:]) {2,}', $aMode, 'plugin_spreadout');
-        $this->Lexer->addSpecialPattern('(?<=[.\?\!\:][\)\]\}\"\']) {2,}', $aMode, 'plugin_spreadout');
-        $this->Lexer->addSpecialPattern('(?<=[.\?\!\:][\]\}\"\']) {2,}', $aMode, 'plugin_spreadout');
+        // $this->Lexer->addSpecialPattern('(?<=[.\?\!\:]) {2,}', $aMode, 'plugin_spreadout');
+        // $this->Lexer->addSpecialPattern('(?<=[.\?\!\:][\)\]\}\"\']) {2,}', $aMode, 'plugin_spreadout');
+        // $this->Lexer->addSpecialPattern('(?<=[.\?\!\:][\]\}\"\']) {2,}', $aMode, 'plugin_spreadout');
+        $this->Lexer->addSpecialPattern(' {2,}', $aMode, 'plugin_spreadout');
       } // connectTo()
 
       /**
@@ -96,7 +97,7 @@
         return array (
           'author' =>	'Emma Bowers',
           'email' =>	'emb@pobox.com',
-          'date' =>	'2022-08-02',
+          'date' =>	'2025-07-04',
           'name' =>	'Spreadout Plugin',
           'desc' =>	'A simple plugin that allows for two spaces between content sentences if the user types two spaces rather than one.',
           'url' =>	'http://www.dokuwiki.org/plugin:spreadout');
